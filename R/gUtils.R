@@ -2123,7 +2123,6 @@ grl.in = function(grl, windows, some = FALSE, only = FALSE, logical = TRUE, exac
 
     m$grl.id = gr$grl.ix[m$query.id]
     m$grl.iid = gr$grl.iix[m$query.id]
-
     if (some){
         tmp = as.data.frame(m[, length(unique(grl.iid)), by = grl.id])
     }
@@ -2133,7 +2132,7 @@ grl.in = function(grl, windows, some = FALSE, only = FALSE, logical = TRUE, exac
                             split(m$query.id, factor(m$grl.id, 1:length(grl)))))
     }
     else{
-        tmp = stats::aggregate(formula = subject.id ~ grl.id, data = m, FUN = function(x) numwin-length(setdiff(1:numwin, x)))
+        tmp = stats::aggregate(x = subject.id ~ grl.id, data = m, FUN = function(x) numwin-length(setdiff(1:numwin, x)))
     }
 
     out = rep(FALSE, length(grl))
