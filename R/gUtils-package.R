@@ -1,7 +1,8 @@
 #' gUtils - Extending GenomicRanges
 #' 
 #' @import GenomicRanges
-#' @importFrom GenomeInfoDb Seqinfo seqinfo keepSeqlevels seqlevels seqlengths seqlevels<- seqlengths<- genome<- seqnames seqlengths seqlengths<- seqinfo seqinfo<- seqnames seqnames<- seqlevels seqlevels<- seqlevelsStyle seqlevelsStyle<-
+#' @import data.table
+#' @importFrom GenomeInfoDb Seqinfo keepSeqlevels seqlengths seqlengths<- genome<- seqinfo seqinfo<- seqnames seqnames<- seqlevels seqlevels<- seqlevelsStyle seqlevelsStyle<- isCircular
 #' @importFrom utils read.delim relist
 #' @importFrom stats setNames
 #' @importFrom methods as is setMethod
