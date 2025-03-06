@@ -4,12 +4,14 @@
 \alias{gr.tile}
 \title{Tile ranges across \code{GRanges}}
 \usage{
-gr.tile(gr, width = 1000)
+gr.tile(gr, width = 1000, stranded = FALSE)
 }
 \arguments{
 \item{gr}{\code{GRanges}, \code{seqlengths} or \code{Seqinfo} range to tile. If has \code{GRanges} has overlaps, will reduce first.}
 
 \item{width}{integer Width of each tile (default = 1e3)}
+
+\item{stranded}{boolean Whether to reverse order of tiles on negative strand (default = FALSE)}
 }
 \value{
 GRanges with tiled intervals

@@ -14,4 +14,5 @@
 #' @importFrom S4Vectors queryHits subjectHits
 #' @importMethodsFrom S4Vectors elementNROWS Rle mcols mcols<- values values<- elementMetadata elementMetadata<- from to 
 #' @importMethodsFrom BiocGenerics width
+#' @importMethodsFrom IRanges relist
 "_PACKAGE"

@@ -1164,8 +1164,19 @@ grl.string = function(grl, mb= FALSE, sep = ',', ...)
 #' @export
 gr.flipstrand =function(gr){
 
-    if (!is(gr, 'GRanges')){
+    is_grangeslist = inherits(gr, "GRangesList")
+    is_granges = inherits(gr, "GRanges")
+    if (!is_granges || !is_grangeslist) {
         stop('Error: GRanges input only. Please check the documentation.')
+    }
+
+    if (is_grangeslist) {
+        tmp_vals = mcols(grl)
+        tmp_gr = unlist(grl, use.names = FALSE)
+        tmp_gr = gr.flipstrand(tmp_gr)
+        new_grl = relist(tmp_gr, grl)
+        mcols(new_grl) = tmp_vals
+        return(new_grl)
     }
 
     if (length(gr)==0){
