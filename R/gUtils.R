@@ -1375,6 +1375,54 @@ gr.pairflip = function(gr)
 }
 
 
+#' get rid of mcols on GRanges/GRangesLists
+#'
+#' remove all metadata from GRanges or GRangesList
+#'
+#' @return GRanges or GRangesList
+#' @author Kevin Hadi
+#' @export gr.noval
+gr.noval = function(gr, keep.col = NULL, drop.col = NULL) {
+    if (is.null(keep.col) & is.null(drop.col)) {
+        select_col = NULL
+    } else {
+        all_col = colnames(gr@elementMetadata)
+        if (inherits(gr, "GRangesList")) {
+            all_col = c(all_col, colnames(gr@unlistData@elementMetadata))
+        }
+
+        if (!is.null(keep.col) & is.null(drop.col)) {
+            select_col = intersect(all_col, keep.col)
+        } else if (is.null(keep.col) & !is.null(drop.col)) {
+            select_col = setdiff(all_col, drop.col)
+        } else if (!is.null(keep.col) && !is.null(drop.col)) {
+            if (intersect(keep.col, drop.col) > 0) {
+              warning(
+                "drop.col and keep.col args have",
+                " overlapping elements",
+                "\nkeeping the columns that overlap"
+              )
+              select_col = intersect(
+                setdiff(all_col, setdiff(drop.col, keep.col)),
+                keep.col
+              )
+            }
+        }
+    }
+    if (inherits(gr, "GRangesList")) {
+        tmp_query = intersect(select_col, colnames(gr@unlistData@elementMetadata))
+        gr@unlistData@elementMetadata = (
+          gr
+          @unlistData
+          @elementMetadata
+          [,c(tmp_query), drop = FALSE]
+        )
+    }
+    tmp_query = intersect(select_col, colnames(gr@elementMetadata))
+    gr@elementMetadata = gr@elementMetadata[,c(tmp_query),drop = FALSE]
+    return(gr)
+}
+
 
 
 #' @name gr.tile
