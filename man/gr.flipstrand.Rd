@@ -5,25 +5,18 @@
 \title{Flip strand on \code{GRanges}}
 \usage{
 gr.flipstrand(gr)
-
-gr.flipstrand(gr)
 }
 \arguments{
 \item{gr}{\code{GRanges} pile with strands to be flipped}
 }
 \value{
 \code{GRanges} with flipped strands (+ to -, * to *, - to *)
-
-\code{GRanges} with flipped strands (+ to -, * to *, - to *)
 }
 \description{
-Flip strand on \code{GRanges}
-
 Flip strand on \code{GRanges}
 }
 \examples{
 
 gr.flipstrand(GRanges(1, IRanges(c(10,10,10),20), strand=c("+","*","-")))
 
-gr.flipstrand(GRanges(1, IRanges(c(10,10,10),20), strand=c("+","*","-")))
 }

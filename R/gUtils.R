@@ -1166,15 +1166,15 @@ gr.flipstrand =function(gr){
 
     is_grangeslist = inherits(gr, "GRangesList")
     is_granges = inherits(gr, "GRanges")
-    if (!is_granges || !is_grangeslist) {
+    if (!is_granges && !is_grangeslist) {
         stop('Error: GRanges input only. Please check the documentation.')
     }
 
     if (is_grangeslist) {
-        tmp_vals = mcols(grl)
-        tmp_gr = unlist(grl, use.names = FALSE)
+        tmp_vals = mcols(gr)
+        tmp_gr = unlist(gr, use.names = FALSE)
         tmp_gr = gr.flipstrand(tmp_gr)
-        new_grl = relist(tmp_gr, grl)
+        new_grl = relist(tmp_gr, gr)
         mcols(new_grl) = tmp_vals
         return(new_grl)
     }
@@ -1355,40 +1355,6 @@ gr.stripstrand = function(gr)
     strand(gr) = "*"
     return(gr)
 }
-
-
-
-#' @name gr.flipstrand
-#' @title Flip strand on \code{GRanges}
-#' @description
-#'
-#' Flip strand on \code{GRanges}
-#'
-#' @param gr \code{GRanges} pile with strands to be flipped
-#' @return \code{GRanges} with flipped strands (+ to -, * to *, - to *)
-#' @examples
-#' gr.flipstrand(GRanges(1, IRanges(c(10,10,10),20), strand=c("+","*","-")))
-#' @export
-gr.flipstrand= function(gr)
-{
-
-    if (!is(gr, 'GRanges')){
-        stop('Error: GRanges input only')
-    }
-
-    if (length(gr)==0){
-        return(gr)
-    }
-
-    which = cbind(1:length(gr), TRUE)[,2] == 1
-
-    if (any(which)){
-        strand(gr)[which] = c('*'='*', '+'='-', '-'='+')[as.character(strand(gr))][which]
-    }
-
-    return(gr)
-}
-
 
 
 #' @name gr.pairflip
