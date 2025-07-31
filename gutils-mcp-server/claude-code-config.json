@@ -1,0 +1,15 @@
+{
+  "name": "gutils",
+  "command": "node",
+  "args": ["${PROJECT_DIR}/gutils-mcp-server/dist/index.js"],
+  "env": {
+    "LOG_LEVEL": "${LOG_LEVEL:-info}",
+    "NODE_ENV": "production",
+    "R_HOME": "${R_HOME}",
+    "PATH": "${PATH}"
+  },
+  "description": "gUtils MCP server for genomic analysis with R",
+  "capabilities": {
+    "tools": true
+  }
+}
